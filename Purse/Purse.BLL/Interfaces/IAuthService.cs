@@ -1,6 +1,5 @@
 ﻿using Purse.BLL.DTO;
 using Purse.BLL.DTO.User;
-using Purse.DAL.Models;
 
 namespace Purse.BLL.Interfaces
 {

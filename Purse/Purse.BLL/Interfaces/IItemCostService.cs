@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Purse.BLL.DTO.CostItem;
 
 namespace Purse.BLL.Interfaces
 {
-    internal interface IItemCostService
+    public interface IItemCostService
     {
-    }
+        public Task<CostItemDTO> CreateCostItem(CostItemDTO costItemDto);
+	}
 }

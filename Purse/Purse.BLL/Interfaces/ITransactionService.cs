@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Purse.BLL.Interfaces
+﻿namespace Purse.BLL.Interfaces
 {
-    internal interface ITransactionService
+    public interface ITransactionService
     {
     }
 }
