@@ -1,4 +1,4 @@
-﻿namespace Purse.DAL
+﻿namespace Purse.DAL.Interfaces
 {
     public interface IDbInitializer
     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Purse.DAL.Interfaces;
 
 namespace Purse.DAL
 {
