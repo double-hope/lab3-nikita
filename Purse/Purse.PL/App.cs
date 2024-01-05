@@ -8,6 +8,7 @@ namespace Purse.PL
     public class App : BackgroundService
     {
         private readonly IAuthService _authService;
+        private CancellationToken token;
         private UserDTO? _user;
 
         public App(IAuthService authService)
@@ -15,22 +16,22 @@ namespace Purse.PL
             _authService = authService;
         }
 
-        protected override Task ExecuteAsync(
+        protected override async Task ExecuteAsync(
             CancellationToken stoppingToken)
         {
+            token = stoppingToken;
             Console.WriteLine("Welcome in App!");
             try
             {
-                ChooseCommand();
+                await Run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine($"Oops! Something went wrong. {ex.Message}");
             }
-            return Task.CompletedTask;
         }
 
-        private async void ChooseCommand()
+        private async Task Run()
         {
             Console.WriteLine("-------------------------");
             Console.WriteLine("Choose from the list:");
@@ -42,15 +43,21 @@ namespace Purse.PL
             switch (command)
             {
                 case "1":
-                {
-                    _user = await AuthHelper.Register(_authService);
-                    break;
-                }
+                    {
+                        _user = await AuthHelper.Register(_authService);
+                        break;
+                    }
                 case "2":
-                {
-                    _user = await AuthHelper.Login(_authService);
-                    break;
-                }
+                    {
+                        _user = await AuthHelper.Login(_authService);
+                        break;
+                    }
+                case "exit": 
+                    {
+                        Console.WriteLine("Exiting...");
+                        await base.StopAsync(token);
+                        break;
+                    }
             }
         }
     }
