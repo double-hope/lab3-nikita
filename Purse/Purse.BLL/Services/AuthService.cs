@@ -25,7 +25,7 @@ namespace Purse.BLL.Services
             }
             if (await _unitOfWork.UserRepository.FirstOrDefaultAsync(user => user.Email == newUserDto.Email) != null)
             {
-                throw new Exception("Користувач з такою поштою вже зареєстрований.");
+                throw new Exception("User with this email already exists.");
             }
 
             var user = _mapper.Map<User>(newUserDto);
@@ -45,7 +45,7 @@ namespace Purse.BLL.Services
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginUserDto.Password, user.Password))
             {
-                throw new Exception("Неправильний email або пароль.");
+                throw new Exception("Wrong email or password.");
             }
 
             return _mapper.Map<UserDTO>(user);
